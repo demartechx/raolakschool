@@ -3,125 +3,273 @@ import '../constants/app_colors.dart';
 import '../constants/app_strings.dart';
 import '../widgets/glass_container.dart';
 
+import 'package:flutter_animate/flutter_animate.dart';
+
 class HomeSection extends StatelessWidget {
   final VoidCallback onRegisterClick;
+  final VoidCallback onCoursesClick;
+  final VoidCallback onScheduleClick;
 
-  const HomeSection({super.key, required this.onRegisterClick});
+  const HomeSection({
+    super.key,
+    required this.onRegisterClick,
+    required this.onCoursesClick,
+    required this.onScheduleClick,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      clipBehavior: Clip.hardEdge,
       decoration: const BoxDecoration(
-        color: AppColors.background,
-        image: DecorationImage(
-          image: NetworkImage("https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop"), // Reliable Classroom setting
-          fit: BoxFit.cover,
-          opacity: 0.2,
-        ),
+        color: Color(0xFF020617),
       ),
       child: Stack(
         children: [
-          // Gradient Overlay
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  AppColors.background.withOpacity(0.8),
-                  AppColors.background,
+          // Ambient Glow 1 (Brand Orange)
+          Positioned(
+            top: -100,
+            right: -50,
+            child: Container(
+              width: 400,
+              height: 400,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: const Color(0xFFF97316).withOpacity(0.15),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFFF97316).withOpacity(0.2),
+                    blurRadius: 200,
+                    spreadRadius: 50,
+                  ),
                 ],
               ),
             ),
           ),
           
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 120, horizontal: 24),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildGlowingTitle(),
-                  const SizedBox(height: 24),
-                  GlassContainer(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                    borderRadius: BorderRadius.circular(50),
-                    child: Column(
-                      children: [
-                        const Text(
-                          AppStrings.tagline,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: AppColors.accent,
-                            letterSpacing: 2,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          "Tuition is 100% FREE • Application Fee: ₦25,000",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: AppColors.white.withOpacity(0.9),
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 64),
-                  
-                  // Info Cards
-                  Wrap(
-                    spacing: 24,
-                    runSpacing: 24,
-                    alignment: WrapAlignment.center,
-                    children: [
-                      _buildInfoGlass(Icons.location_on, AppStrings.location),
-                      _buildInfoGlass(Icons.rocket_launch, "Launch: ${AppStrings.startDate}"),
-                    ],
-                  ),
-                  
-                  const SizedBox(height: 64),
-                  
-                  // CTA Button with Glow
-                  Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.primary.withOpacity(0.5),
-                          blurRadius: 30,
-                          spreadRadius: 2,
-                          offset: const Offset(0, 5),
-                        ),
-                      ],
-                    ),
-                    child: ElevatedButton(
-                      onPressed: onRegisterClick,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        foregroundColor: AppColors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 25),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        elevation: 0, 
-                      ),
-                      child: const Text(
-                        "JOIN THE FUTURE",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                    ),
+           // Ambient Glow 2 (Accent Blue/Purple)
+          Positioned(
+            bottom: -100,
+            left: -50,
+            child: Container(
+              width: 400,
+              height: 400,
+              decoration: BoxDecoration(
+                 shape: BoxShape.circle,
+                color: const Color(0xFF6366F1).withOpacity(0.15),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF6366F1).withOpacity(0.2),
+                    blurRadius: 200,
+                    spreadRadius: 50,
                   ),
                 ],
               ),
+            ),
+          ),
+
+          // Main Content
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 180, bottom: 96, left: 24, right: 24), // Increased top padding for margin
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Logo
+                  Hero(
+                    tag: 'hero_logo',
+                    child: Image.asset(
+                      "assets/images/logo_transparent.png",
+                      height: 120, 
+                    ),
+                  ).animate().fadeIn(duration: 800.ms).scale(delay: 200.ms),
+                  
+                  const SizedBox(height: 48),
+
+                  // Big Headline
+                  Text(
+                    "Master the\nFuture of Tech",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 56, // Massive
+                      height: 1.1,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: -1.5,
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(
+                          color: Colors.white.withOpacity(0.1),
+                          offset: const Offset(0, 4),
+                          blurRadius: 20,
+                        ),
+                      ],
+                    ),
+                  ).animate().fadeIn(delay: 300.ms, duration: 800.ms).moveY(begin: 30, end: 0),
+
+                  const SizedBox(height: 24),
+
+                  // Subtext
+                  Container(
+                    constraints: const BoxConstraints(maxWidth: 600),
+                    child: Text(
+                      "Join the elite tech school where tuition is 100% FREE. Expert mentors, physical classes, and real-world projects.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 18,
+                        height: 1.6,
+                        color: Colors.blueGrey.shade200,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ).animate().fadeIn(delay: 500.ms, duration: 800.ms).moveY(begin: 20, end: 0),
+                  
+                  const SizedBox(height: 48),
+                  
+                  // Feature Pills
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 16,
+                    alignment: WrapAlignment.center,
+                    children: [
+                      _buildFeaturePill(Icons.verified_user_outlined, "100% Tuition Free"),
+                      _buildFeaturePill(Icons.map_outlined, AppStrings.location),
+                    ],
+                  ).animate().fadeIn(delay: 700.ms).slideX(begin: 0.2, end: 0),
+
+                  const SizedBox(height: 56),
+
+                  // Action Buttons
+                  Wrap(
+                    spacing: 20,
+                    runSpacing: 20,
+                    children: [
+                      // Primary Button
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFFF97316), Color(0xFFEA580C)], // Orange Gradient
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xFFF97316).withOpacity(0.4),
+                              blurRadius: 20,
+                              offset: const Offset(0, 8),
+                            ),
+                          ],
+                        ),
+                        child: ElevatedButton(
+                          onPressed: onRegisterClick,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            shadowColor: Colors.transparent,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                          ),
+                          child: const Text(
+                            "APPLY NOW",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ).animate().fadeIn(delay: 900.ms).scale(),
+                ],
+              ),
+            ),
+          ),
+          
+          // Responsive, Elevated Navigation Menu (Moved to END of Stack for Top Z-Index)
+          Positioned(
+            top: 20,
+            left: 20,
+            right: 20,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                bool isMobile = MediaQuery.of(context).size.width < 900;
+                
+                return Center(
+                  child: Container(
+                    constraints: const BoxConstraints(maxWidth: 1200),
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF0F172A).withOpacity(0.7), // Glass dark
+                      borderRadius: BorderRadius.circular(100),
+                      border: Border.all(color: Colors.white.withOpacity(0.1)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius: 20,
+                          offset: const Offset(0, 10),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Brand
+                        const Text(
+                          "RAOLAK TECH",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            letterSpacing: 2,
+                          ),
+                        ),
+
+                        // Nav Items
+                        if (isMobile)
+                          PopupMenuButton<String>(
+                            icon: const Icon(Icons.menu, color: Colors.white),
+                            color: const Color(0xFF1E293B),
+                            onSelected: (value) {
+                              if (value == 'Courses') onCoursesClick();
+                              if (value == 'Schedule') onScheduleClick();
+                              if (value == 'Conduct') onScheduleClick();
+                              if (value == 'Apply') onRegisterClick();
+                            },
+                            itemBuilder: (BuildContext context) => [
+                              const PopupMenuItem(value: 'Courses', child: Text('Courses', style: TextStyle(color: Colors.white))),
+                              const PopupMenuItem(value: 'Schedule', child: Text('Schedule', style: TextStyle(color: Colors.white))),
+                              const PopupMenuItem(value: 'Conduct', child: Text('Code of Conduct', style: TextStyle(color: Colors.white))),
+                              const PopupMenuItem(value: 'Apply', child: Text('Apply Now', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold))),
+                            ],
+                          )
+                        else
+                          Row(
+                            children: [
+                              _buildNavLink("Courses", onCoursesClick),
+                              const SizedBox(width: 24),
+                              _buildNavLink("Schedule", onScheduleClick),
+                              const SizedBox(width: 24),
+                              _buildNavLink("Code of Conduct", onScheduleClick),
+                              const SizedBox(width: 32),
+                              ElevatedButton(
+                                onPressed: onRegisterClick,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColors.primary,
+                                  foregroundColor: Colors.white,
+                                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                ),
+                                child: const Text("APPLY NOW", style: TextStyle(fontWeight: FontWeight.bold)),
+                              ),
+                            ],
+                          ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ],
@@ -129,41 +277,43 @@ class HomeSection extends StatelessWidget {
     );
   }
 
-  Widget _buildGlowingTitle() {
-    return ShaderMask(
-      shaderCallback: (bounds) => const LinearGradient(
-        colors: [AppColors.white, AppColors.accent],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      ).createShader(bounds),
-      child: const Text(
-        AppStrings.schoolName,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: 64,
-          fontWeight: FontWeight.w900,
-          color: Colors.white, // Required for shader
-          letterSpacing: -2,
-          height: 1.1,
+  Widget _buildNavLink(String text, VoidCallback onTap) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Text(
+          text,
+          style: TextStyle(
+            color: Colors.white.withOpacity(0.9),
+            fontWeight: FontWeight.w500,
+            fontSize: 15,
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildInfoGlass(IconData icon, String text) {
-    return GlassContainer(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      borderRadius: BorderRadius.circular(12),
-      color: Colors.white,
-      opacity: 0.05,
+  Widget _buildFeaturePill(IconData icon, String text) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: Colors.white.withOpacity(0.05)),
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: AppColors.textSecondary, size: 20),
-          const SizedBox(width: 12),
+          Icon(icon, color: const Color(0xFFF97316), size: 16),
+          const SizedBox(width: 8),
           Text(
             text,
-            style: const TextStyle(color: AppColors.textPrimary, fontSize: 16),
+            style: TextStyle(
+              color: Colors.blueGrey.shade100,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ],
       ),
