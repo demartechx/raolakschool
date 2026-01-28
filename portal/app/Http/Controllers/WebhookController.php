@@ -12,11 +12,15 @@ class WebhookController extends Controller
      */
     public function handle(Request $request)
     {
-        // 1. Get the raw payload
-        $payload = @file_get_contents("php://input");
-        $data = json_decode($payload);
+    
+    //     {"username":"Adeagbo Matthew Damilare","account_number":"6577751982","account_name":"Adeagbo Matthew Damilare","amount":100,"charges":1,"credited_amount":99,"means":"Monnify","type":"Funding","paymentreference":"MNFY|40|20260128180532|003502","paidOn":"2026-01-28 18:05:33.281","product_balance":99,"retailer":null} 
 
-        Log::info('Webhook received', (array) $data);
+        // 1. Get the raw payload
+
+    $data = (object) $request->all();
+
+    Log::info('Webhook received', $request->all());
+    
 
         if (!$data || !isset($data->account_number) || !isset($data->amount)) {
             Log::warning('Webhook received invalid data structure');
@@ -48,7 +52,7 @@ class WebhookController extends Controller
             \App\Services\WalletService::credit(
                 $user,
                 (float) $data->amount,
-                "Wallet Funding via Transfer ({$data->bank_name})",
+                "Wallet Funding via Transfer ({$data->means})",
                 $reference
             );
 
