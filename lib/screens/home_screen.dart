@@ -3,7 +3,7 @@ import '../constants/app_colors.dart';
 import '../sections/home_section.dart';
 import '../sections/courses_section.dart';
 import '../sections/schedule_section.dart';
-import '../sections/registration_section.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
   final GlobalKey _coursesKey = GlobalKey();
   final GlobalKey _scheduleKey = GlobalKey();
-  final GlobalKey _registrationKey = GlobalKey();
+
 
   void _scrollToSection(GlobalKey key) {
     Scrollable.ensureVisible(
@@ -21,12 +21,11 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  void _scrollToRegistration() {
-    Scrollable.ensureVisible(
-      _registrationKey.currentContext!,
-      duration: const Duration(seconds: 1),
-      curve: Curves.easeInOut,
-    );
+  Future<void> _launchRegister() async {
+    final Uri url = Uri.parse('https://school.raolak.com/portal/public/enroll');
+    if (!await launchUrl(url)) {
+      debugPrint("Could not launch $url");
+    }
   }
 
   @override
@@ -38,13 +37,13 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             HomeSection(
-              onRegisterClick: _scrollToRegistration,
+              onRegisterClick: _launchRegister,
               onCoursesClick: () => _scrollToSection(_coursesKey),
               onScheduleClick: () => _scrollToSection(_scheduleKey),
             ),
             Container(key: _coursesKey, child: const CoursesSection()),
             Container(key: _scheduleKey, child: const ScheduleSection()),
-            Container(key: _registrationKey, child: const RegistrationSection()),
+
             
             // Footer
             Container(

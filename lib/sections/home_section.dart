@@ -4,6 +4,7 @@ import '../constants/app_strings.dart';
 import '../widgets/glass_container.dart';
 
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeSection extends StatelessWidget {
   final VoidCallback onRegisterClick;
@@ -16,6 +17,13 @@ class HomeSection extends StatelessWidget {
     required this.onCoursesClick,
     required this.onScheduleClick,
   });
+
+  Future<void> _launchLogin() async {
+    final Uri url = Uri.parse('https://school.raolak.com/portal/public/login');
+    if (!await launchUrl(url)) {
+      debugPrint("Could not launch $url");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -235,12 +243,14 @@ class HomeSection extends StatelessWidget {
                               if (value == 'Courses') onCoursesClick();
                               if (value == 'Schedule') onScheduleClick();
                               if (value == 'Conduct') onScheduleClick();
+                              if (value == 'Login') _launchLogin();
                               if (value == 'Apply') onRegisterClick();
                             },
                             itemBuilder: (BuildContext context) => [
                               const PopupMenuItem(value: 'Courses', child: Text('Courses', style: TextStyle(color: Colors.white))),
                               const PopupMenuItem(value: 'Schedule', child: Text('Schedule', style: TextStyle(color: Colors.white))),
                               const PopupMenuItem(value: 'Conduct', child: Text('Code of Conduct', style: TextStyle(color: Colors.white))),
+                              const PopupMenuItem(value: 'Login', child: Text('Login', style: TextStyle(color: Colors.white))),
                               const PopupMenuItem(value: 'Apply', child: Text('Apply Now', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold))),
                             ],
                           )
@@ -252,6 +262,8 @@ class HomeSection extends StatelessWidget {
                               _buildNavLink("Schedule", onScheduleClick),
                               const SizedBox(width: 24),
                               _buildNavLink("Code of Conduct", onScheduleClick),
+                              const SizedBox(width: 24),
+                              _buildNavLink("Login", _launchLogin),
                               const SizedBox(width: 32),
                               ElevatedButton(
                                 onPressed: onRegisterClick,
