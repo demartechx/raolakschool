@@ -74,10 +74,17 @@
         </div>
 
         <div class="pt-4">
-            <button
-                class="w-full py-3.5 bg-white hover:bg-zinc-200 text-black font-semibold rounded-xl shadow-lg shadow-white/5 transform active:scale-[0.98] transition-all duration-200">
-                {{ __('Create Account') }}
-            </button>
+            @if(now()->greaterThanOrEqualTo('2026-02-10'))
+                <button disabled
+                    class="w-full py-3.5 bg-zinc-800 text-zinc-500 font-semibold rounded-xl border border-zinc-700 cursor-not-allowed">
+                    Registration Closed
+                </button>
+            @else
+                <button
+                    class="w-full py-3.5 bg-white hover:bg-zinc-200 text-black font-semibold rounded-xl shadow-lg shadow-white/5 transform active:scale-[0.98] transition-all duration-200">
+                    {{ __('Create Account') }}
+                </button>
+            @endif
         </div>
 
         <div class="text-center mt-8 pt-6 border-t border-zinc-800/50">

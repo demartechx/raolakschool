@@ -41,10 +41,11 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        $login_type = filter_var($this->input('email'), FILTER_VALIDATE_EMAIL) ? 'email' : 'phone_number';
+        $email = strtolower($this->input('email'));
+        $login_type = filter_var($email, FILTER_VALIDATE_EMAIL) ? 'email' : 'phone_number';
 
         $credentials = [
-            $login_type => $this->input('email'),
+            $login_type => $email,
             'password' => $this->input('password')
         ];
 

@@ -17,7 +17,10 @@ class EnrollmentController extends Controller
      */
     public function create()
     {
-        return view('student.enroll');
+        $programmingCount = Enrollment::where('course', 'Programming')->count();
+        $graphicsCount = Enrollment::where('course', 'Graphics Design')->count();
+
+        return view('student.enroll', compact('programmingCount', 'graphicsCount'));
     }
 
     /**
@@ -29,8 +32,14 @@ class EnrollmentController extends Controller
             'course' => ['required', 'string', Rule::in(['Graphics Design', 'Programming'])],
         ]);
 
-        if (now()->greaterThanOrEqualTo('2026-02-03')) {
+        if (now()->greaterThanOrEqualTo('2026-02-10')) {
             return back()->withErrors(['deadline' => 'Registration has closed for the 2026 session.']);
+        }
+
+        // Check Course Capacity
+        $count = Enrollment::where('course', $request->course)->count();
+        if ($count >= 30) {
+            return back()->withErrors(['capacity' => "The $request->course course has reached its maximum capacity of 30 students."]);
         }
 
         $user = Auth::user();

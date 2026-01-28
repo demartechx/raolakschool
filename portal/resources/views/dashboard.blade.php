@@ -29,7 +29,7 @@
                     <div class="p-2.5 bg-zinc-900 rounded-lg border border-zinc-800 text-zinc-400">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                d="M7 18V6l10 12V6M5 10h14M5 14h14">
                             </path>
                         </svg>
                     </div>
@@ -44,16 +44,6 @@
                         class="text-5xl font-semibold text-white tracking-tighter">{{ number_format(Auth::user()->wallet_balance, 2) }}</span>
                 </div>
 
-                <div class="mt-8 pt-6 border-t border-zinc-800/50 flex">
-                    <button
-                        class="flex items-center text-sm font-medium text-white group-hover:text-primary-400 transition-colors">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4">
-                            </path>
-                        </svg>
-                        Fund Wallet
-                    </button>
-                </div>
             </div>
 
             <!-- Dedicated Account -->
@@ -115,7 +105,7 @@
                             </svg>
                         </div>
                         <span class="relative flex h-2.5 w-2.5">
-                            @if(now()->greaterThanOrEqualTo('2026-02-03'))
+                            @if(now()->greaterThanOrEqualTo('2026-02-10'))
                                 <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
                             @else
                                 <span
@@ -125,16 +115,17 @@
                         </span>
                     </div>
                     <h3 class="text-xl font-medium text-white mb-2 tracking-tight">2026 Session</h3>
-                    @if(now()->greaterThanOrEqualTo('2026-02-03'))
+                    @if(now()->greaterThanOrEqualTo('2026-02-10'))
                         <p class="text-zinc-400 text-sm leading-relaxed">Registration for the 2026 academic session has
-                            <span class="text-red-400 font-medium">closed</span>.</p>
+                            <span class="text-red-400 font-medium">closed</span>.
+                        </p>
                     @else
                         <p class="text-zinc-400 text-sm leading-relaxed">Admission is currently ongoing. Secure your spot in
                             the tech school today.</p>
                     @endif
                 </div>
 
-                @if(now()->greaterThanOrEqualTo('2026-02-03'))
+                @if(now()->greaterThanOrEqualTo('2026-02-10'))
                     <button disabled
                         class="mt-6 w-full py-3 bg-zinc-800 text-zinc-500 font-semibold text-sm text-center rounded-lg cursor-not-allowed border border-zinc-700">
                         Registration Closed

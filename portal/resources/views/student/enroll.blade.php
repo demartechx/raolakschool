@@ -43,8 +43,13 @@
                             </li>
                             <li class="flex items-start gap-4">
                                 <div class="mt-1 w-1.5 h-1.5 rounded-full bg-zinc-600 shrink-0"></div>
-                                <span class="leading-relaxed"><strong class="text-white font-medium">Tracks:</strong>
+                                <span class="leading-relaxed"><strong class="text-white font-medium">Courses:</strong>
                                     Choose between Graphics Design or Programming.</span>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div class="mt-1 w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></div>
+                                <span class="leading-relaxed"><strong class="text-white font-medium">Capacity:</strong>
+                                    Limited to <strong class="text-white">30 students</strong> per course.</span>
                             </li>
                             <li class="flex items-start gap-4 pt-4 border-t border-zinc-800/50 mt-4">
                                 <svg class="w-5 h-5 text-yellow-500 shrink-0" fill="none" stroke="currentColor"
@@ -134,7 +139,7 @@
                             </div>
                         @endif
 
-                        @if(now()->greaterThanOrEqualTo('2026-02-03'))
+                        @if(now()->greaterThanOrEqualTo('2026-02-10'))
                             <div class="mt-8 p-12 bg-red-950/20 border border-red-500/20 rounded-2xl text-center">
                                 <div class="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
                                     <svg class="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -157,15 +162,21 @@
                                 @csrf
 
                                 <div class="mb-8">
-                                    <label for="course" class="block text-sm font-medium text-zinc-400 mb-2">Select Program
-                                        Track</label>
+                                    <label for="course" class="block text-sm font-medium text-zinc-400 mb-2">Select
+                                        Course</label>
                                     <div class="relative">
                                         <select id="course" name="course"
                                             class="w-full appearance-none bg-zinc-950 border border-zinc-700 rounded-lg py-4 px-5 text-white focus:border-white focus:ring-0 focus:outline-none transition-colors cursor-pointer"
                                             required>
                                             <option value="" disabled selected>Choose a course...</option>
-                                            <option value="Graphics Design">Graphics Design</option>
-                                            <option value="Programming">Programming</option>
+                                            <option value="Graphics Design" {{ $graphicsCount >= 30 ? 'disabled' : '' }}>
+                                                Graphics Design ({{ $graphicsCount }}/30)
+                                                {{ $graphicsCount >= 30 ? '— [FULL]' : '' }}
+                                            </option>
+                                            <option value="Programming" {{ $programmingCount >= 30 ? 'disabled' : '' }}>
+                                                Programming ({{ $programmingCount }}/30)
+                                                {{ $programmingCount >= 30 ? '— [FULL]' : '' }}
+                                            </option>
                                         </select>
                                         <div
                                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-zinc-400">
