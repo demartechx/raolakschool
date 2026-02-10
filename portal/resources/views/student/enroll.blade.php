@@ -80,9 +80,9 @@
                                         class="text-emerald-400 font-bold">admitted</span> into the program.</p>
                                 <p class="text-emerald-400 font-medium">Classes start on <strong>
                                         @if(Auth::user()->enrollment->course === 'Programming')
-                                            February 5th at 1:30 PM
+                                            February 12th at 1:30 PM
                                         @else
-                                            February 6th at 10:00 AM
+                                            February 13th at 10:00 AM
                                         @endif
                                     </strong>.</p>
 
