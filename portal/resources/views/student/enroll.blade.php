@@ -139,7 +139,7 @@
                             </div>
                         @endif
 
-                        @if(now()->greaterThanOrEqualTo('2026-02-10'))
+                        @if(now()->greaterThanOrEqualTo('2026-02-12 12:00:00'))
                             <div class="mt-8 p-12 bg-red-950/20 border border-red-500/20 rounded-2xl text-center">
                                 <div class="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
                                     <svg class="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
