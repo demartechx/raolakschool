@@ -32,7 +32,7 @@ class EnrollmentController extends Controller
             'course' => ['required', 'string', Rule::in(['Graphics Design', 'Programming'])],
         ]);
 
-        if (now()->greaterThanOrEqualTo('2026-02-10')) {
+        if (now()->greaterThanOrEqualTo('2026-02-12 12:00:00')) {
             return back()->withErrors(['deadline' => 'Registration has closed for the 2026 session.']);
         }
 

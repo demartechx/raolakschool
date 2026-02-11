@@ -105,7 +105,7 @@
                             </svg>
                         </div>
                         <span class="relative flex h-2.5 w-2.5">
-                            @if(now()->greaterThanOrEqualTo('2026-02-10'))
+                            @if(now()->greaterThanOrEqualTo('2026-02-12 12:00:00'))
                                 <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
                             @else
                                 <span
@@ -115,7 +115,7 @@
                         </span>
                     </div>
                     <h3 class="text-xl font-medium text-white mb-2 tracking-tight">2026 Session</h3>
-                    @if(now()->greaterThanOrEqualTo('2026-02-10'))
+                    @if(now()->greaterThanOrEqualTo('2026-02-12 12:00:00'))
                         <p class="text-zinc-400 text-sm leading-relaxed">Registration for the 2026 academic session has
                             <span class="text-red-400 font-medium">closed</span>.
                         </p>
@@ -125,7 +125,7 @@
                     @endif
                 </div>
 
-                @if(now()->greaterThanOrEqualTo('2026-02-10'))
+                @if(now()->greaterThanOrEqualTo('2026-02-12 12:00:00'))
                     <button disabled
                         class="mt-6 w-full py-3 bg-zinc-800 text-zinc-500 font-semibold text-sm text-center rounded-lg cursor-not-allowed border border-zinc-700">
                         Registration Closed

@@ -74,7 +74,7 @@
         </div>
 
         <div class="pt-4">
-            @if(now()->greaterThanOrEqualTo('2026-02-10'))
+            @if(now()->greaterThanOrEqualTo('2026-02-12 12:00:00'))
                 <button disabled
                     class="w-full py-3.5 bg-zinc-800 text-zinc-500 font-semibold rounded-xl border border-zinc-700 cursor-not-allowed">
                     Registration Closed
