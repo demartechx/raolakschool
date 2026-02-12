@@ -10,7 +10,13 @@ return [
     | This value sets the root URL for Livewire assets (scripts, styles, etc).
     |
     */
-    'asset_url' => env('APP_URL', null),
+    'asset_url' => (function () {
+        $url = env('APP_URL', '');
+        if ($url && !str_ends_with($url, '/public')) {
+            $url .= '/public';
+        }
+        return $url ?: null;
+    })(),
 
     /*
     |---------------------------------------------------------------------------
