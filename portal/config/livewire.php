@@ -10,7 +10,7 @@ return [
     | This value sets the root URL for Livewire assets (scripts, styles, etc).
     |
     */
-    'asset_url' => 'https://school.raolak.com/portal',
+    'asset_url' => null,
 
     /*
     |---------------------------------------------------------------------------
