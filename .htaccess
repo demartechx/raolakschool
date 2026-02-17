@@ -1,6 +1,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # Forward Filament admin panel to the Laravel portal
+    RewriteRule ^admin(/.*)?$ portal/public/admin$1 [L,QSA]
+
     # Forward Livewire JS and update endpoint to the Laravel portal
     RewriteRule ^livewire/(.*)$ portal/public/livewire/$1 [L,QSA]
 
@@ -12,4 +15,7 @@
 
     # Forward Sanctum CSRF endpoint to the Laravel portal
     RewriteRule ^sanctum/(.*)$ portal/public/sanctum/$1 [L,QSA]
+
+    # Forward storage (uploaded files/images) to the Laravel portal
+    RewriteRule ^storage/(.*)$ portal/public/storage/$1 [L,QSA]
 </IfModule>
