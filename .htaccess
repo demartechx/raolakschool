@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Forward Livewire JS and update endpoint to the Laravel portal
+    RewriteRule ^livewire/(.*)$ portal/public/livewire/$1 [L,QSA]
+
+    # Forward Filament published CSS/JS assets to the Laravel portal
+    RewriteRule ^filament/(.*)$ portal/public/filament/$1 [L,QSA]
+
+    # Forward API requests (e.g. webhooks) to the Laravel portal
+    RewriteRule ^api/(.*)$ portal/public/api/$1 [L,QSA]
+
+    # Forward Sanctum CSRF endpoint to the Laravel portal
+    RewriteRule ^sanctum/(.*)$ portal/public/sanctum/$1 [L,QSA]
+</IfModule>
