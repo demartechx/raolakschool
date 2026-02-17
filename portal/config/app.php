@@ -54,6 +54,9 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    // URL of the Flutter frontend (may differ from app.url in subdirectory deployments)
+    'frontend_url' => env('FRONTEND_URL', env('APP_URL', 'http://localhost')),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
