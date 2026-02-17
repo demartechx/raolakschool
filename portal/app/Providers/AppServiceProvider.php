@@ -19,15 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if ($this->app->environment('production') || $this->app->environment('local')) {
+        if ($this->app->environment('production')) {
             \Illuminate\Support\Facades\URL::forceScheme('https');
         }
 
-        // Fix Livewire asset URL for subdirectory deployment (e.g., /portal/public/)
-        // This overrides any cached config value at runtime
-        $appUrl = config('app.url', '');
-        if ($appUrl && !str_ends_with($appUrl, '/public')) {
-            config(['livewire.asset_url' => $appUrl . '/public']);
-        }
     }
 }
