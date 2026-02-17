@@ -4,6 +4,10 @@
     </IfModule>
 
     RewriteEngine On
+    RewriteBase /portal
+
+    # Serve deploy.php directly without passing through Laravel
+    RewriteRule ^deploy\.php$ - [L]
 
     # Handle Front Controller...
     RewriteCond %{REQUEST_URI} !(\/public\/)

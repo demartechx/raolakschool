@@ -29,3 +29,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+// Catch-all: serve Flutter's index.html for any route not matched above.
+// This enables Flutter SPA client-side routing (e.g. refreshing on /home won't 404).
+Route::get('/{any}', function () {
+    return response()->file(public_path('index.html'));
+})->where('any', '.*');

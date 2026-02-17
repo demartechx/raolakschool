@@ -48,6 +48,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('https://school.raolak.com');
+        return redirect(config('app.url'));
     }
 }

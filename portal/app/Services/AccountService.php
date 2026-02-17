@@ -28,7 +28,7 @@ class AccountService
 
             // Let's construct the data payload.
             $data = [
-                'website' => 'school.raolak.com', // hardcoded as per test script
+                'website' => parse_url(config('app.url'), PHP_URL_HOST),
                 'product' => config('payment.name'),
                 // user specific not strictly needed for PRODUCT balance?
                 // Wait, product_balance returns the WALLET balance of the PRODUCT (the merchant)?
@@ -70,9 +70,9 @@ class AccountService
             if (!$user->virtualAccount) {
                 // Prepare data for generation
                 $genData = [
-                    'website' => 'school.raolak.com',
+                    'website' => parse_url(config('app.url'), PHP_URL_HOST),
                     'product' => config('payment.name'),
-                    'website_callback' => 'https://school.raolak.com/portal/public/api/webhook', // Should probably be dynamic/env
+                    'website_callback' => url('/api/webhook'),
                     'username' => $user->name, // Usernames must be unique/clean?
                     // PayGate might require unique username.
                     // Let's use user-id suffix or sanitize name?
